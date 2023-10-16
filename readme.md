@@ -16,6 +16,6 @@ This code repository contains code used to create policy wheel data visualizatio
 
 ### Programs:
 
-* **policy_wheels_demo.rmd** - This R Markdown tutorial demonstrates how to create policy wheel data visualizations. It will eventually be incorporated into a vignette for a policy wheels shiny app.
+* **demo.rmd** - This R Markdown tutorial demonstrates how to create policy wheel data visualizations. It will eventually be incorporated into a vignette for a policy wheels shiny app.
 * **app.R** - Policy wheel shiny app
 
