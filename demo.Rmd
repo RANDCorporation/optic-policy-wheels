@@ -1,0 +1,68 @@
+---
+title: "Policy Wheel Tutorial"
+author: "Joshua Eagan"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+# loading packages
+
+# need to cite Gu, Z. circlize implements and enhances circular visualization
+# in R. Bioinformatics 2014.
+suppressPackageStartupMessages(library(circlize))
+library(data.table)
+library(plyr)
+library(lubridate)
+
+# loading functions
+for(file in list.files("/poppy/programs/jeagan/tools/policy_wheels/R")){
+  cat(file)
+  source(paste("/poppy/programs/jeagan/tools/policy_wheels/R", file, sep="/"))
+}
+rm(file)
+
+```
+
+# Introduction
+
+This tutorial will demonstrate the creation of OPTIC style 
+
+```{r}
+
+# setting up arguments
+
+df <- read.csv('/poppy/data/derived_data/studies/optic/tools/policy_wheels/example_data/total_opioid_policies.csv')
+names(df) = gsub("\\.", " ", names(df))
+
+#Restrict to relevant policy intervals, for locations that implemented the policy
+policy_intervals <- c(2006, 2012, 2018)
+
+year_range = 1999:2020
+
+# Ordering policies:
+policies <- c("Pain clinic law", "Initial Rx limit", "Operational PDMP", 
+              "CME", "Medical Marijuanna", "Must PDMP")
+
+# Set up plot options and hardcode plot ordering
+plot_colors <- c("#5e3c99", "#b2abd2", 
+                 "#a6611a", "#dfc27d", 
+                 "#0571b0", "#80cdc1")
+
+legend_args = list(x = "center",
+       pch = c(15, 15, 15, 15, 15, 15),
+       legend = wheel_opts$policy[col_order],
+       col = wheel_opts$col[col_order],
+       xjust = 0.5, y.intersp = 1.3, 
+       x.intersp = 1.3, cex = 2, 
+       pt.cex = 2.7, bty = "n", ncol = 2)
+
+out_file = "/poppy/data/derived_data/studies/optic/tools/policy_wheels/output/policy_wheel_flora.svg"
+
+
+# generating policy wheels
+
+
+```
