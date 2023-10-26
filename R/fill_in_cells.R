@@ -1,5 +1,5 @@
 # Below fills in policy wheel cells by year and policy
-fill_in_cells <- function(p, y){
+fill_in_cells <- function(p, y, df, wheel_opts){
   
   state_implementors <- unique(df[policy == p & year == y]$state)
   

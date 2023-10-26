@@ -1,17 +1,36 @@
 ---
 title: "Policy Wheel Tutorial"
-author: "Joshua Eagan"
+author: "Max Griswald, Joshua Eagan, Beth Ann Griffin"
 date: "`r Sys.Date()`"
 output: html_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE)
+```
+
+# Introduction
+
+This tutorial will demonstrate the creation of OPTIC style policy wheel data visualizations. These graphs are meant to illustrate the timeline over which state level policies are implemented concurrently. For an example of one of these data visualizations, skip to the end of this tutorial.
+
+-------------------------------------------
+
+# Setup
+
+In order to create one of these graphs, you first need to load in a few R packages: 
+
+* `circlize` (Gu, Z., 2014)
+* `data.table`
+* `plyr`
+* `lubridate`
+
+You also need to load in the appropriate functions from this project's working directory using `source`.
+
+
+```{r message=FALSE}
 
 # loading packages
 
-# need to cite Gu, Z. circlize implements and enhances circular visualization
-# in R. Bioinformatics 2014.
 suppressPackageStartupMessages(library(circlize))
 library(data.table)
 library(plyr)
@@ -19,27 +38,33 @@ library(lubridate)
 
 # loading functions
 for(file in list.files("/poppy/programs/jeagan/tools/policy_wheels/R")){
-  cat(file)
+  cat(paste0(file, "\n") )
   source(paste("/poppy/programs/jeagan/tools/policy_wheels/R", file, sep="/"))
 }
-rm(file)
 
 ```
 
-# Introduction
+The high level R function needed to plot policy wheels is `plot_policy_wheels`. This function also requires the use of two internal functions: `plot_policy_wheel_internal` and `fill_in_cells` that run under the hood of `plot_policy_wheels`. 
 
-This tutorial will demonstrate the creation of OPTIC style 
+-------------------------------------------
+
+# Plotting Policy wheels
+
+Next, you need to load in your data and set up some of the other function arguments to `plot_policy_wheels`.
 
 ```{r}
 
-# setting up arguments
-
+# reading in a data frame where rows are states, columns are policies, and values are enactment dates
+# Dates can come in the forms: "1/15/2015", "2015-01-15", "2015", or "January 15, 2015"
 df <- read.csv('/poppy/data/derived_data/studies/optic/tools/policy_wheels/example_data/total_opioid_policies.csv')
 names(df) = gsub("\\.", " ", names(df))
 
-#Restrict to relevant policy intervals, for locations that implemented the policy
+# setting up other arguments
+
+# Restrict to relevant policy intervals, for locations that implemented the policy
 policy_intervals <- c(2006, 2012, 2018)
 
+# what years will be displayed in the plot?
 year_range = 1999:2020
 
 # Ordering policies:
@@ -51,18 +76,56 @@ plot_colors <- c("#5e3c99", "#b2abd2",
                  "#a6611a", "#dfc27d", 
                  "#0571b0", "#80cdc1")
 
+# some settings to adjust the legend
 legend_args = list(x = "center",
        pch = c(15, 15, 15, 15, 15, 15),
-       legend = wheel_opts$policy[col_order],
-       col = wheel_opts$col[col_order],
        xjust = 0.5, y.intersp = 1.3, 
        x.intersp = 1.3, cex = 2, 
        pt.cex = 2.7, bty = "n", ncol = 2)
 
+# where should the plot output be saved?
 out_file = "/poppy/data/derived_data/studies/optic/tools/policy_wheels/output/policy_wheel_flora.svg"
 
+```
+
+
+Now that you have things set up, you can run `plot_policy_wheels` to make your graph.
+
+
+```{r}
 
 # generating policy wheels
+plot_policy_wheels(data = df,
+                  policies = policies,
+                  policy_intervals = policy_intervals,
+                  year_range = year_range,
+                  title = NULL,
+                  plot_colors = plot_colors,
+                  plot_width = 20, 
+                  plot_height = 12,
+                  legend_args = legend_args,
+                  out_file = out_file)
 
+# displaying the new graph
+knitr::include_graphics(out_file)
 
 ```
+
+
+Referencing the graph, you can see that the ordering of the `policies` argument corresponds to the ordering of `plot_colors`. Since we did not specify a title `title = NULL` there was no title in the plot. The policy enactment dates in `df` were converted to years, and split across 3 separate wheels according to `policy_intervals`, and the only years displayed in the plot are within the range specified in `year_range`. 
+
+
+If you are making your own plots, you may need to play around with the following settings:
+
+
+* `plot_width` and `plot_height`: these edit the dimensions of the plot output and will need to be adjusted according to your needs.
+* `legend_args`: this is a list whose elements will be passed to `graphics::legend()`. Within the function, two arguments are already configured for you, `legend` and `col`, but it's up to you to configure the remaining. The defaults are probably fine here, but if you want to change anything, refer to `?graphics::legend`.
+
+
+-------------------------------------------
+
+# Sources:
+
+* Gu, Z. circlize implements and enhances circular visualization in R. Bioinformatics 2014.
+
+

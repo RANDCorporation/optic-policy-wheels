@@ -17,7 +17,11 @@ plot_policy_wheels = function(data,
                               plot_colors,
                               plot_width = 20, 
                               plot_height = 12,
-                              legend_args = NULL,
+                              legend_args = list(x = "center",
+                                                 pch = c(15, 15, 15, 15, 15, 15),
+                                                 xjust = 0.5, y.intersp = 1.3, 
+                                                 x.intersp = 1.3, cex = 2, 
+                                                 pt.cex = 2.7, bty = "n", ncol = 2),
                               out_file = paste0("policy_wheels_", Sys.Date(),".svg")){
 
         # Order states so that region-names make sense when applied to areas of the policy circle:
@@ -84,7 +88,7 @@ plot_policy_wheels = function(data,
         
         layout(layout.mat, respect = TRUE, heights = c(6, 1), widths = c(5, 5, 5))
         
-        lapply(policy_intervals, plot_policy_wheel_internal)
+        lapply(policy_intervals, plot_policy_wheel_internal, states,  df, wheel_opts)
         
         if(!is.null(title)){
           plot.new()
@@ -100,6 +104,10 @@ plot_policy_wheels = function(data,
         plot.new()
         plot.window(xlim = c(0,3), ylim = c(0,5))
         ll <- par("usr")
+        
+        legend_args = c(list(       legend = wheel_opts$policy[col_order],
+                                    col = wheel_opts$col[col_order]),
+                        legend_args)
         do.call(legend, legend_args)
         
         dev.off()

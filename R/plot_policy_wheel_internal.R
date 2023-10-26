@@ -1,4 +1,4 @@
-plot_policy_wheel_internal <- function(y){
+plot_policy_wheel_internal <- function(y, states, df, wheel_opts){
   
   # Establish margins & cell padding
   par(mai=c(0.35, 0.35, 0.35, 0.35), xpd = TRUE)
@@ -72,7 +72,7 @@ plot_policy_wheel_internal <- function(y){
                    border = NA, col = NA, font = 2, facing = "bending.inside")
   
   # Highlight states that implemented legislation by Jan 1 of that year
-  lapply(policies, fill_in_cells, y = y)
+  lapply(policies, fill_in_cells, y = y,  df = df, wheel_opts = wheel_opts)
   
   circos.clear()
   
