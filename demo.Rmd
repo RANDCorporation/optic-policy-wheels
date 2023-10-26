@@ -1,6 +1,6 @@
 ---
 title: "Policy Wheel Tutorial"
-author: "Max Griswald, Joshua Eagan, Beth Ann Griffin"
+author: "Max Griswold, Beth Ann Griffin, and Joshua Eagan"
 date: "`r Sys.Date()`"
 output: html_document
 ---
