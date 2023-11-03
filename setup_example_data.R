@@ -110,7 +110,7 @@ for(i in 1:length(date_vars)){
 }
 
 # for all policies, there is only one non-missing date associated for each state.
-# therefore, information will be lost by transitioning to wide data.
+# therefore, information will not be lost by transitioning to wide data.
 clean_wide = clean_long %>% group_by(state) %>%
   summarize(across(date_vars, mode))
   
