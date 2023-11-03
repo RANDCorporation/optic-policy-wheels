@@ -16,4 +16,8 @@
 *.svg
 *.dta
 *.RData
+*.zip
 
+
+
+.Rproj.user
