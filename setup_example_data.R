@@ -90,6 +90,10 @@ purrr::map(policy_datasets, ~ .x %>%
 # merging data sets
 clean_long = policy_datasets %>% purrr::reduce(dplyr::full_join)
 
+# creating an additional variable needed for the last policy wheel
+clean_long$copnal_date_all_prescribe = clean_long$copnal_date_eff_all
+clean_long$copnal_date_all_prescribe[clean_long$copnal_nat_mandate != "Mandate prescribing"] = NA
+
 # creating a wide dataset
 date_vars = names(clean_long)[grepl("_date", names(clean_long))]
 

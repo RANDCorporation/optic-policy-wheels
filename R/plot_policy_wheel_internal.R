@@ -1,15 +1,14 @@
-plot_policy_wheel_internal <- function(y, states, df, wheel_opts){
+plot_policy_wheel_internal <- function(y, states, df, wheel_opts, policies){
   
   # Establish margins & cell padding
   par(mai=c(0.35, 0.35, 0.35, 0.35), xpd = TRUE)
-  
   circos.par(cell.padding = c(0, 0, 0, 0))
   
   # Add fifty-one sectors (i.e. one for each state + DC)
   circos.initialize(factors = states, xlim = c(0, 1))
   
-  # Add six tracks (i.e. one for each policy)
-  replicate(6, circos.track(ylim = c(0,1), track.height = 0.09), simplify = F)
+  # Add tracks (one for each policy)
+  replicate(length(policies), circos.track(ylim = c(0,1), track.height = 0.09), simplify = F)
   
   # Add state labels
   for(s in unique(states)) {
@@ -34,7 +33,8 @@ plot_policy_wheel_internal <- function(y, states, df, wheel_opts){
   # Mid-Atlantic
   highlight.sector(sector.index = c("NY", "NJ", "PA"), track.index = 1,
                    text = "Mid-Atlantic", padding = c(1,0,5,0), cex = 1.4, font = 2,
-                   border = NA, col = NA, facing = "bending.inside")
+                   border = NA, col = NA, facing = "bending.inside",
+                   text.vjust = -1)
   
   # East North Central
   highlight.sector(sector.index = c("IL", "IN", "MI", "OH", "WI"), track.index = 1,
@@ -54,7 +54,8 @@ plot_policy_wheel_internal <- function(y, states, df, wheel_opts){
   # East South Central
   highlight.sector(sector.index = c("AL", "KY", "MS", "TN"), track.index = 1,
                    text = "East South Central", padding = c(1,0,5,0), cex = 1.4, font = 2,
-                   border = NA, col = NA, facing = "bending.outside")
+                   border = NA, col = NA, facing = "bending.outside",
+                   text.vjust = 1.65)
   
   # West South Central
   highlight.sector(sector.index = c("AR", "LA", "OK", "TX"), track.index = 1,
