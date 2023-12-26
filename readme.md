@@ -30,7 +30,7 @@ This code repository contains code used to create policy wheel data visualizatio
 To reproduce the demo from the shiny app, follow these steps:
 
 1. pull this repository to your machine using [git pull](https://github.com/git-guides/git-pull) or by clicking the green drop down button that says code on this page, selecting `Download ZIP`, and unzipping that file somewhere on your computer.
-2. Download the zip files from each of the following URLs to the Data/raw folder of the repository your just downloaded. Unzip them into to folders with the same names as each zip file.
+2. Download the zip files from each of the following URLs to the Data/raw folder of the repository your just downloaded. Unzip them into to Data/raw- they should be named correctly by default.
 
 * https://www.rand.org/content/dam/rand/pubs/external_publications/EP60000/EP68648/RAND_EP68648-OBBT.zip
 * https://www.rand.org/content/dam/rand/pubs/external_publications/EP60000/EP69157/RAND_EP69157-IMD.zip
@@ -38,8 +38,11 @@ To reproduce the demo from the shiny app, follow these steps:
 * https://www.rand.org/content/dam/rand/pubs/external_publications/EP60000/EP68218/RAND_EP68218-GSL.zip
 * https://www.rand.org/content/dam/rand/pubs/external_publications/EP60000/EP68090/RAND_EP68090_Coprescrib-NAL.zip
 * https://www.rand.org/content/dam/rand/pubs/external_publications/EP60000/EP68218/RAND_EP68218-PDMP.zip
-* `https://www.rand.org/content/dam/rand/pubs/external_publications/EP60000/EP67480/RAND_EP67480-MMPD.zip`
+* https://www.rand.org/content/dam/rand/pubs/external_publications/EP60000/EP67480/RAND_EP67480-MMPD.zip
 
 3. Make sure a [modern version of R and R Studio](https://posit.co/download/rstudio-desktop/) are installed on your computer (we use `R version 4.3.2`.) 
 4. Launch R Studio, and open the `policy_wheels.Rproj` in the repository you obtained in step 1.
-5. Open the file `setup_example_data.R`
+5. run the line `renv::restore()` in the console (lower left hand corner of R studio). This installs some software dependencies. Follow the instructions in the console until this is finished running.
+6. Open the file `setup_example_data.R`, and run that file from start to finish. This creates the data you will be using in the demo. 
+7. Open the `demo.Rmd` file- run this file from start to finish by pressing the knit button or (ctrl + shift + k)
+
