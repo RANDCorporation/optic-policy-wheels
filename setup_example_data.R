@@ -8,50 +8,16 @@
 ###############################################################
 
 # loading packages
-library(tidyverse)
+library(dplyr)
 library(curl)
+library(readxl)
+library(purrr)
 
 # Statistical mode
 mode <- function(x) {
   ux <- unique(x)
   ux = ux[!is.na(ux)]
   ux[which.max(tabulate(match(x, ux)))]
-}
-
-# if the policy data needs do be downloaded, do that
-
-# this needs to be troubleshooted- 403 errors from the curl preventing this
-if(!dir.exists("./Data/raw/NAL")){
-
-  urls = c("https://www.rand.org/content/dam/rand/pubs/external_publications/EP60000/EP68648/RAND_EP68648-OBBT.zip",
-           "https://www.rand.org/content/dam/rand/pubs/external_publications/EP60000/EP69157/RAND_EP69157-IMD.zip",
-           "https://www.rand.org/content/dam/rand/pubs/external_publications/EP60000/EP68090/RAND_EP68090-NAL.zip",
-           "https://www.rand.org/content/dam/rand/pubs/external_publications/EP60000/EP68218/RAND_EP68218-GSL.zip",
-           "https://www.rand.org/content/dam/rand/pubs/external_publications/EP60000/EP68090/RAND_EP68090_Coprescrib-NAL.zip",
-           "https://www.rand.org/content/dam/rand/pubs/external_publications/EP60000/EP68218/RAND_EP68218-PDMP.zip",
-           "https://www.rand.org/content/dam/rand/pubs/external_publications/EP60000/EP67480/RAND_EP67480-MMPD.zip")
-  
-  for(i in 1:length(urls)){
-
-    # curling data from RAND website
-    url <- urls[i]
-    local_file <- paste0("./Data/raw/", sub(".*/", "", url))
-    curl_download(url, destfile = local_file)
-    
-    # Open a connection to the zip file
-    zip_con <- unz(local_file)
-    
-    # Extract the contents of the zip file to a local directory
-    extract_dir <- "./Data/raw/"
-    files <- list.files(zip_con)
-    for (file in files) {
-      unz(zip_file, file, exdir = extract_dir)
-    }
-    
-    # Close the connection to the zip file
-    close(zip_con)
-  }
-  
 }
 
 # cleaning the policy data

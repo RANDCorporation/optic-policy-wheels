@@ -11,7 +11,7 @@ knitr::opts_chunk$set(echo = TRUE, warning = FALSE)
 
 # Introduction
 
-This tutorial Demonstrates the creation of OPTIC style policy wheel data visualizations. These graphs are meant to illustrate the timeline over which state level policies are implemented concurrently. For some examples of these data visualizations, skip to the middle of this tutorial.
+This tutorial demonstrates the creation of OPTIC style policy wheel data visualizations. These graphs are meant to illustrate the timeline over which state level policies are implemented concurrently. For some examples of these data visualizations, skip to the middle of this tutorial.
 
 -------------------------------------------
 
@@ -50,7 +50,7 @@ The R function we use to plot policy wheels is `plot_policy_wheels`.
 
 # Plotting Policy wheels
 
-Next, you need to load in your data. In the code below, I load in a wide version of the data, meaning that there is one row for each state and a column for each policy, containing the date each policy was implemented for each state. Next, I rename columns in the wide data so variables are named with the text I want to be displayed in the graphs.
+Next, you need to load in your data. In the code below, we load in a wide version of the data, meaning that there is one row for each state and a column for each policy, containing the date each policy was implemented for each state. Next, we rename columns in the wide data so variables are named with the text we want displayed in the graphs.
 
 ```{r}
 
