@@ -21,7 +21,7 @@ mode <- function(x) {
 # if the policy data needs do be downloaded, do that
 
 # this needs to be troubleshooted- 403 errors from the curl preventing this
-if(!dir.exists("./data/raw/NAL")){
+if(!dir.exists("./Data/raw/NAL")){
 
   urls = c("https://www.rand.org/content/dam/rand/pubs/external_publications/EP60000/EP68648/RAND_EP68648-OBBT.zip",
            "https://www.rand.org/content/dam/rand/pubs/external_publications/EP60000/EP69157/RAND_EP69157-IMD.zip",
@@ -35,14 +35,14 @@ if(!dir.exists("./data/raw/NAL")){
 
     # curling data from RAND website
     url <- urls[i]
-    local_file <- paste0("./data/raw/", sub(".*/", "", url))
+    local_file <- paste0("./Data/raw/", sub(".*/", "", url))
     curl_download(url, destfile = local_file)
     
     # Open a connection to the zip file
     zip_con <- unz(local_file)
     
     # Extract the contents of the zip file to a local directory
-    extract_dir <- "./data/raw/"
+    extract_dir <- "./Data/raw/"
     files <- list.files(zip_con)
     for (file in files) {
       unz(zip_file, file, exdir = extract_dir)
@@ -57,13 +57,13 @@ if(!dir.exists("./data/raw/NAL")){
 # cleaning the policy data
 
 policy_datasets = list()
-raw_paths = c("./data/raw/OBBT/WEB_OBBT.xlsx",
-              "./data/raw/IMD/WEB_IMD-Waiver.xlsx",
-              "./data/raw/NAL/WEB_NAL_1990-2022.xlsx",
-              "./data/raw/GSL/WEB_GSL_1990-2021.xlsx",
-              "./data/raw/Co-prescribing NAL/WEB_Coprescribing_NAL.xlsx",
-              "./data/raw/PDMP 12-2020/WEB_OPTIC_PDMP.xlsx",
-              "./data/raw/Medical Marijuana Policy Data/WEB_MJ Policy.xlsx")
+raw_paths = c("./Data/raw/OBBT/WEB_OBBT.xlsx",
+              "./Data/raw/IMD/WEB_IMD-Waiver.xlsx",
+              "./Data/raw/NAL/WEB_NAL_1990-2022.xlsx",
+              "./Data/raw/GSL/WEB_GSL_1990-2021.xlsx",
+              "./Data/raw/Co-prescribing NAL/WEB_Coprescribing_NAL.xlsx",
+              "./Data/raw/PDMP 12-2020/WEB_OPTIC_PDMP.xlsx",
+              "./Data/raw/Medical Marijuana Policy Data/WEB_MJ Policy.xlsx")
 data_names = c("obbt", "imd", "nal", "gsl", "copnal", "pdmp", "mm")
 for(i in 1:length(raw_paths)){
   
@@ -122,5 +122,5 @@ clean_wide = clean_long %>% group_by(state) %>%
 clean_long = clean_long %>% arrange(state, year)
 
 # writing output data
-write.csv(clean_long, file = "./data/processed/example_data_long.csv")
-write.csv(clean_wide, file = "./data/processed/example_data_wide.csv")
+write.csv(clean_long, file = "./Data/processed/example_data_long.csv")
+write.csv(clean_wide, file = "./Data/processed/example_data_wide.csv")

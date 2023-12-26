@@ -1,6 +1,6 @@
 ---
 title: "Policy Wheel Tutorial"
-author: "Max Griswold, Beth Ann Griffin, and Joshua Eagan"
+author: "Joshua Eagan, Max Griswold, Beth Ann Griffin, Seema (Choksy) Pessar, Rosalie Pacula, Bradley Stein"
 date: "`r Sys.Date()`"
 output: html_document
 ---
@@ -57,12 +57,12 @@ Next, you need to load in your data. In the code below, I load in a wide version
 # reading in a data frame where rows are states, columns are policies, and values are enactment dates
 
 # Dates can come in the forms: "1/15/2015", "2015-01-15", "2015", or "January 15, 2015"
-df_wide <- read.csv('data/processed/example_data_wide.csv')
+df_wide <- read.csv('Data/processed/example_data_wide.csv')
 names(df_wide) = gsub("\\.", " ", names(df_wide))
 
 # renaming variables
 names(df_wide)[names(df_wide) == "nal_date_any_nal"] = "Any Naloxone Access Law (NAL)"
-names(df_wide)[names(df_wide) == "nal_date_nal_protocol_standing"] = "NAL Standing Order or Protocall"
+names(df_wide)[names(df_wide) == "nal_date_nal_protocol_standing"] = "NAL Standing Order or Protocol"
 names(df_wide)[names(df_wide) == "nal_date_nal_Rx_prescriptive_auth"] = "NAL Prescriptive Authority"
 
 # All NAL laws and GSL
@@ -93,7 +93,7 @@ Once the data are clean, you can run `plot_policy_wheels` to make your graph.
 plot_policy_wheels(data = df_wide,
                    
                    # Ordering policies by name:
-                  policies = c("Any Naloxone Access Law (NAL)", "NAL Standing Order or Protocall", "NAL Prescriptive Authority", "Any Good Samaritan Law (GSL)", "GSL Arrest"),
+                  policies = c("Any Naloxone Access Law (NAL)", "NAL Standing Order or Protocol", "NAL Prescriptive Authority", "Any Good Samaritan Law (GSL)", "GSL Arrest"),
                   
                   # name of the state variable
                   state_var = "state",
@@ -101,7 +101,7 @@ plot_policy_wheels(data = df_wide,
                   # Restrict to relevant policy intervals, for locations that implemented the policy
                   policy_intervals = c(2010, 2015, 2020),
                   plot_colors = c("#1f77b4", "#ff7f0e", "#FFFF00", "#dab8e5", "#9467bd"),
-                  legend_args = list(x = "center", xjust = 0.5, y.intersp = 1.3, x.intersp = 1.3, cex = 2, pt.cex = 2.7, bty = "n", ncol = 2),
+                  legend_args = list(x = "center", xjust = 0.5, y.intersp = 1.3, x.intersp = 1.3, cex = 2.5, pt.cex = 2.7, bty = "n", ncol = 2),
                   
                   panel_width = 4,
                   panel_height = 5,
@@ -114,8 +114,37 @@ knitr::include_graphics("www/policy_wheel_1.svg")
 
 ```
 
-Referencing the graph, you can see that the ordering of the `policies` argument corresponds to the ordering of `plot_colors`. The policy enactment dates in `df` were converted to years and split across 3 separate wheels according to `policy_intervals`.
+Referencing the graph, you can see that the ordering of the `policies` argument corresponds to the ordering of `plot_colors`. The policy enactment dates in `df` were converted to years and split across 3 separate wheels according to `policy_intervals`. There is an interesting amount of variation in the "in-between" years (2011-2014 and 2016-2019)- so increasing the amount of years displayed might better illustrate these trends. You can see an example of this change below.
 
+```{r message=FALSE}
+
+# generating policy wheels
+plot_policy_wheels(data = df_wide,
+                   
+                   # Ordering policies by name:
+                  policies = c("Any Naloxone Access Law (NAL)", "NAL Standing Order or Protocol", "NAL Prescriptive Authority", "Any Good Samaritan Law (GSL)", "GSL Arrest"),
+                  
+                  # name of the state variable
+                  state_var = "state",
+                  
+                  # Restrict to relevant policy intervals, for locations that implemented the policy
+                  policy_intervals = c(2010, 2013, 2016, 2019, 2021),
+                  plot_colors = c("#1f77b4", "#ff7f0e", "#FFFF00", "#dab8e5", "#9467bd"),
+                  legend_args = list(x = "center", xjust = 0.5, y.intersp = 1.3, x.intersp = 1.3, cex = 2.5, pt.cex = 2.7, bty = "n", ncol = 2),
+                  
+                  panel_width = 4,
+                  panel_height = 5,
+                  
+                  nrows = 2,
+                  ncols = 3,
+                  
+                  # where should the graph be saved?
+                  out_file = "www/policy_wheel_1_revised.svg")
+
+# displaying the new graph
+knitr::include_graphics("www/policy_wheel_1_revised.svg")
+
+```
 
 If you are making your own plots, you may can also edit the following settings:
 
@@ -131,7 +160,7 @@ See another example of a policy wheel below:
 plot_policy_wheels(data = df_wide,
                    
                    # Ordering policies by name:
-                  policies = c("Any Naloxone Access Law (NAL)", "NAL Standing Order or Protocall", "NAL Prescriptive Authority",
+                  policies = c("Any Naloxone Access Law (NAL)", "NAL Standing Order or Protocol", "NAL Prescriptive Authority",
                     "Medical Marijuana Law", "Medical MJ Dispensaries Open", "Recreational Marijuana Law", "Recreational MJ Store Open"),
                   
                   # name of the state variable
@@ -141,7 +170,7 @@ plot_policy_wheels(data = df_wide,
                   policy_intervals = c(2012, 2015, 2018, 2021),
                   plot_colors = c("#1f77b4", "#ff7f0e", "#FFFF00", 
                                   "#f7a8a8", "#d62728", "#90EE90","#006400"),
-                  legend_args = list(x = "center", xjust = 0.5, y.intersp = 1.3, x.intersp = 1.3, cex = 2, pt.cex = 2.7, bty = "n", ncol = 2),
+                  legend_args = list(x = "center", xjust = 0.5, y.intersp = 1.3, x.intersp = 1.3, cex = 2.5, pt.cex = 2.7, bty = "n", ncol = 2),
                   
                   plot_width = 22, 
                   plot_height = 16,
@@ -160,9 +189,9 @@ knitr::include_graphics("www/policy_wheel_2.svg")
 
 ```
 
-In this example, we include data for 7 policies at 4 time points in three year intervals. From the plot, we can infer that most states effected a Naloxone Access Law (NAL) between 2012 and 2015 (blue). Many of these laws allowed the distribution of Naloxone through a standing or protocol order (orange), but most states did not pass laws allowing pharmacists prescriptive authority (yellow) until later. We can also see that the states in the West and North-East tended to pass these policies across the board earlier than states in the Midwest and South. Also, note that the `nrows` and `ncols` arguments were used to control the layout of the wheels.
+In this example, we include data for 7 policies at 4 time points in 3 year intervals. Also, note that the `nrows` and `ncols` arguments were used to control the layout of the wheels. The result is a bit crowded, and we would recommend including fewer than 7, or even 6 policies in one of these plots. We can infer that most states effected a Naloxone Access Law (NAL) between 2012 and 2015 (blue). Many of these laws allowed the distribution of Naloxone through a standing or protocol order (orange), but most states did not pass laws allowing pharmacists prescriptive authority (yellow) until later. We can also see that the states in the West and North-East tended to pass these policies across the board earlier than states in the Midwest and South. Also notice that medicinal (red) and recreational (green) marijuana laws were passed around the same time (if not slightly after) NAL in many states.
 
-Lastly, we can create a plot that shows the association between the passage of NAL laws and Naloxone Co-prescribing Laws that mandate prescribing and affect all patients.
+Lastly, create a plot that shows the association between the passage of NAL laws and Naloxone Co-prescribing Laws that mandate prescribing and affect all patients.
 
 ```{R message=FALSE}
 
@@ -170,7 +199,7 @@ Lastly, we can create a plot that shows the association between the passage of N
 plot_policy_wheels(data = df_wide,
                    
                    # Ordering policies by name:
-                  policies = c("Any Naloxone Access Law (NAL)", "NAL Standing Order or Protocall", "NAL Prescriptive Authority",
+                  policies = c("Any Naloxone Access Law (NAL)", "NAL Standing Order or Protocol", "NAL Prescriptive Authority",
                     "Naloxone Co-prescribing\nMandating Prescription"),
                   
                   # name of the state variable
@@ -180,7 +209,7 @@ plot_policy_wheels(data = df_wide,
                   policy_intervals = c(2012, 2014, 2016, 2018, 2020, 2022),
                   plot_colors = c("#1f77b4", "#ff7f0e", "#FFFF00", 
                                   "#00b3b3"),
-                  legend_args = list(x = "center", xjust = 0.5, y.intersp = 1.3, x.intersp = 1.3, cex = 2, pt.cex = 2.7, bty = "n", ncol = 2),
+                  legend_args = list(x = "center", xjust = 0.5, y.intersp = 1.3, x.intersp = 1.3, cex = 2.5, pt.cex = 2.7, bty = "n", ncol = 2),
                   
                   plot_width = 22, 
                   plot_height = 16,

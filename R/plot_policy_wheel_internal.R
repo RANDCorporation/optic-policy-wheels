@@ -20,9 +20,14 @@ plot_policy_wheel_internal <- function(y, states, df, wheel_opts, policies){
   text(0,0, labels = print(y), cex = 2.8)
   
   # Add line segments to distinguish between regions
+  # for(s in c("CT", "NY", "IL", "DE", "IA", "AL", "AR", "AZ", "CA")) {
+  #   circos.segments(x0 = -0.1, y0 = 0, x1 = -0.07, y1 = 5.8, lwd = 3.5, sector.index = s)
+  # }
   for(s in c("CT", "NY", "IL", "DE", "IA", "AL", "AR", "AZ", "CA")) {
-    circos.segments(x0 = -0.1, y0 = 0, x1 = -0.07, y1 = 5.8, lwd = 3.5, sector.index = s)
+    circos.segments(x0 = -0.1, y0 = 0, x1 = -0.07, y1 = (1.16*length(policies)), lwd = 3.5, sector.index = s)
   }
+  
+  
   
   # Label the regions
   # New England
