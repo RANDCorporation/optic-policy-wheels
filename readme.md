@@ -39,7 +39,7 @@ To reproduce the demo, follow these steps:
 * https://www.rand.org/content/dam/rand/pubs/external_publications/EP60000/EP68218/RAND_EP68218-PDMP.zip
 * https://www.rand.org/content/dam/rand/pubs/external_publications/EP60000/EP67480/RAND_EP67480-MMPD.zip
 
-3. Make sure a [modern version of R and R Studio](https://posit.co/download/rstudio-desktop/) are installed on your computer (we use `R version 4.3.2`, but at the very least, you need a version compatible with `rtools43`).
+3. Make sure a [modern version of R and R Studio](https://posit.co/download/rstudio-desktop/) are installed on your computer (we use `R version 4.3.2`).
 4. Make sure to have the proper toolchain installed: linux: GCC and GNU Make, mac: [xcode](https://developer.apple.com/xcode/resources/), windows: [rtools](https://cran.r-project.org/bin/windows/Rtools/rtools43/files/rtools43-5863-5818.exe). Run `Sys.which("make")` from R to check that this was successful.
 5. Launch R Studio, and open the `policy_wheels.Rproj` in the repository you obtained in step 1.
 6. Run the line `renv::restore()` in the console (lower left hand corner of R studio). This installs some software dependencies. Follow the instructions in the console until this is finished running. If this fails, try [updating R and R Studio](https://posit.co/download/rstudio-desktop/) (selecting all the default settings) and double check that you have the proper toolchain installed (step 4).
