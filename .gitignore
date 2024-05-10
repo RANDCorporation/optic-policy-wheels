@@ -13,7 +13,6 @@
 *.sas7bdat
 *.jpeg
 *.bak
-*.svg
 *.dta
 *.RData
 *.zip
