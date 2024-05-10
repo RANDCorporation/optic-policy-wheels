@@ -2,7 +2,7 @@
 title: "Policy Wheel Tutorial"
 author: "Joshua Eagan, Max Griswold, Beth Ann Griffin, Seema (Choksy) Pessar, Rosalie Pacula, Bradley Stein"
 date: "`r Sys.Date()`"
-output: html_document
+output: github_document
 ---
 
 ```{r setup, include=FALSE}
@@ -146,7 +146,7 @@ knitr::include_graphics("www/policy_wheel_1_revised.svg")
 
 ```
 
-If you are making your own plots, you may can also edit the following settings:
+If you are making your own plots, you can also edit the following settings:
 
 
 * `plot_width` and `plot_height`: these edit the dimensions of the plot output and will need to be adjusted according to your needs.
