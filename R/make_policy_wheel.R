@@ -3,7 +3,6 @@
 # A Function to Plot Policy Wheel Data Visualizations
 # Joshua Eagan
 # 2023-10-12
-# P.I. Beth Ann Griffin
 #
 ###############################################################
 

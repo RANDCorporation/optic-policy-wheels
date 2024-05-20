@@ -3,13 +3,11 @@
 # Cleaning policy data
 # Joshua Eagan
 # 2023-10-31
-# P.I. Beth Ann Griffin
 #
 ###############################################################
 
 # loading packages
 library(dplyr)
-library(curl)
 library(readxl)
 library(purrr)
 

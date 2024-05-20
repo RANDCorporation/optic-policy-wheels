@@ -37,10 +37,9 @@ library(plyr)
 library(lubridate)
 
 # loading functions
-for(file in list.files("R")){
-  cat(paste0(file, "\n") )
-  source(paste("R", file, sep="/"))
-}
+source("R/fill_in_cells.R")
+source("R/make_policy_wheel.R")
+source("R/plot_policy_wheel_internal.R")
 
 ```
 
@@ -50,7 +49,7 @@ The R function we use to plot policy wheels is `plot_policy_wheels`.
 
 # Plotting Policy wheels
 
-Next, you need to load in your data. In the code below, we load in a wide version of the data, meaning that there is one row for each state and a column for each policy, containing the date each policy was implemented for each state. Next, we rename columns in the wide data so variables are named with the text we want displayed in the graphs.
+Next, you need to load in your data. In the code below, we load in a wide version of the data, meaning that there is one row for each state (50 states and DC) and a column for each policy, containing the date each policy was implemented for each state. Next, we rename columns in the wide data so variables are named with the text we want displayed in the graphs.
 
 ```{r}
 
@@ -84,7 +83,49 @@ head(df_wide)
 ```
 
 
-Once the data are clean, you can run `plot_policy_wheels` to make your graph.
+Once the data are clean, you can run `plot_policy_wheels` to make your graph. This function takes the following arguments:
+
+**data** 
+a dataframe - this should be wide dataset; rows are states and columns contain the dates each policy was passed. Dates can be in the form of "1/15/2015", "2015-01-15", "2015", or "January 15, 2015"- only the year will be kept.
+
+**policies** 
+a character vector containing the names of the policy variables you would like contained in your policy wheels.
+
+**state_var** 
+a string- the name of the variable identifying states by their two letter abbreviation (all caps).
+
+**policy_intervals** 
+a numeric vector stating the time points to create policy wheels for.
+
+**nrows** 
+how many rows of policy wheels should be included? defaults to `ceiling(length(policy_intervals)/3)`.
+
+**ncols** 
+how many columns of policy wheels should be included? defaults to 3.
+
+**panel_width** 
+how wide should each panel (each panel contains a policy wheel) be?
+
+**panel_height** 
+how tall should each panel be?
+
+**byrow** 
+T/F- should wheels be ordered by rows (horizontally) or by columns (vertically)?
+
+**plot_colors** 
+character vector containing the names of the colors corresponding with each policy.
+
+**plot_width** 
+how wide should the plot be in total?
+
+**plot_height** 
+how tall should the plot be in total (including legend).
+
+**legend_args** 
+extra arguments to be passed on to `legend`. See `?legend` for more details.
+
+**out_file** 
+the file path to save the new plot at.
 
 
 ```{r message=FALSE}
@@ -114,7 +155,7 @@ knitr::include_graphics("www/policy_wheel_1.svg")
 
 ```
 
-Referencing the graph, you can see that the ordering of the `policies` argument corresponds to the ordering of `plot_colors`. The policy enactment dates in `df` were converted to years and split across 3 separate wheels according to `policy_intervals`. There is an interesting amount of variation in the "in-between" years (2011-2014 and 2016-2019)- so increasing the amount of years displayed might better illustrate these trends. You can see an example of this change below.
+Referencing the graph, you can see that the ordering of the `policies` argument corresponds to the ordering of `plot_colors`. The policy enactment dates in `df` were converted to years and split across 3 separate wheels according to `policy_intervals`. One important thing to note is that policies that were passed before the first year of `policy_intervals` are still included in the graph. There is an interesting amount of variation in the "in-between" years (2011-2014 and 2016-2019)- so increasing the amount of years displayed might better illustrate these trends. You can see an example of this change below.
 
 ```{r message=FALSE}
 
