@@ -1,5 +1,5 @@
 
-# OPTIC Covariates Data Management
+# Demo for Creating OPTIC Policy Wheels
 
 * Programmers: Joshua Eagan, Max Griswald
 * Created Date: 10/12/2023
@@ -8,7 +8,7 @@
 
 ### Description
 
-This repository contains code used to create policy wheel data visualizations.
+This repository contains code used to create policy wheel data visualizations as seen in OPTIC publications, e.g. Pessar, 2021 and Davis, 2024.
 
 ---
 
@@ -29,7 +29,7 @@ To reproduce the demo, follow these steps:
 1. pull this repository to your machine using [git pull](https://github.com/git-guides/git-pull) or by clicking the green drop down button that says code on this page, selecting `Download ZIP`, and unzipping that file somewhere on your computer.
 2. Make sure a [modern version of R and R Studio](https://posit.co/download/rstudio-desktop/) are installed on your computer (we use `R version 4.4.0`).
 3. Make sure to have the proper toolchain installed: linux: GCC and GNU Make, mac: [xcode](https://developer.apple.com/xcode/resources/), windows: [rtools](https://cran.r-project.org/bin/windows/Rtools/rtools43/files/). Run `Sys.which("make")` from R to check that this was successful (if so, the path to the make executable will be returned.)
-4. Launch R Studio, and open the `policy_wheels.Rproj` in the repository you obtained in step 1. You can do this by navigating to file, open file, and double clicking on the project in RStudio's file explorer.
+4. Launch R Studio, and open the `policy_wheels.Rproj` in the repository you obtained in step 1. You can do this by navigating to `file`, `open file`, and double clicking on the project in RStudio's file explorer.
 5. Run the line `renv::restore()` in the console (lower left hand corner of R studio). This installs some software dependencies. Follow the instructions in the console until this is finished running. If this fails, try [updating R and R Studio](https://posit.co/download/rstudio-desktop/) (selecting all the default settings) and double check that you have the proper toolchain installed (step 4).
 6. Open the `demo.Rmd` file- run this file from start to finish by pressing the knit button or (ctrl + shift + k)
 
@@ -46,3 +46,10 @@ If you wish to reproduce the input data for the demo:
 * https://www.rand.org/content/dam/rand/pubs/external_publications/EP60000/EP68218/RAND_EP68218-PDMP.zip
 * https://www.rand.org/content/dam/rand/pubs/external_publications/EP60000/EP67480/RAND_EP67480-MMPD.zip
 3. Open the file `setup_example_data.R`, and run that file from start to finish. This creates the data used in the demo. 
+
+### References
+- **Pessar, Seema Choksy, Anne Boustead, Yimin Ge, Rosanna Smart, and Rosalie Liccardo Pacula.** “Assessment of State and Federal Health Policies for Opioid Use Disorder Treatment During the COVID-19 Pandemic and Beyond.” JAMA Health Forum 2, no. 11 (November 2021): e213833. https://doi.org/10.1001/jamahealthforum.2021.3833.
+- **Davis, Corey S., Derek H. Carr, and Bradley D. Stein.** “Drug-Related Physician Continuing Medical Education Requirements, 2010–2020.” Journal of Substance Use and Addiction Treatment 161 (2024): 209356. https://doi.org/10.1016/j.josat.2024.209356.
+
+### Copyright and License
+Copyright (C) 2024 RAND Corporation. This code is made available under the GPL-v3 license.
