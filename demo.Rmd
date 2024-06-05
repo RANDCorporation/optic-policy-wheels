@@ -1,5 +1,5 @@
 ---
-title: "Policy Wheel Tutorial"
+title: "Tutorial for Creating OPTIC Policy Wheels"
 author: "Joshua Eagan, Max Griswold, Beth Ann Griffin, Seema (Choksy) Pessar, Rosalie Pacula, Bradley Stein"
 date: "`r Sys.Date()`"
 output: github_document
@@ -11,7 +11,7 @@ knitr::opts_chunk$set(echo = TRUE, warning = FALSE)
 
 # Introduction
 
-This tutorial demonstrates the creation of OPTIC style policy wheel data visualizations. These graphs are meant to illustrate the timeline over which state level policies are implemented concurrently. For some examples of these data visualizations, skip to the middle of this tutorial.
+This tutorial demonstrates the creation of OPTIC (Opioid Policy Tools and Information Center) style policy wheel data visualizations. These graphs are meant to illustrate the timeline over which state level policies are implemented concurrently. For some examples of these data visualizations, skip to the middle of this tutorial.
 
 -------------------------------------------
 
@@ -30,7 +30,6 @@ You also need to load in the appropriate functions from this project's working d
 ```{r message=FALSE}
 
 # loading packages
-
 suppressPackageStartupMessages(library(circlize))
 library(data.table)
 library(plyr)
@@ -64,17 +63,17 @@ names(df_wide)[names(df_wide) == "nal_date_any_nal"] = "Any Naloxone Access Law 
 names(df_wide)[names(df_wide) == "nal_date_nal_protocol_standing"] = "NAL Standing Order or Protocol"
 names(df_wide)[names(df_wide) == "nal_date_nal_Rx_prescriptive_auth"] = "NAL Prescriptive Authority"
 
-# All NAL laws and GSL
+# all NAL laws and GSL
 names(df_wide)[names(df_wide) == "gsl_date_anygsl"] = "Any Good Samaritan Law (GSL)"
 names(df_wide)[names(df_wide) == "gsl_date_gsl_arrest"] = "GSL Arrest"
 
-# NAL laws and Medical/rec cannabis access 
+# NAL laws and medical/rec cannabis access 
 names(df_wide)[names(df_wide) == "mm_date_effMML"] = "Medical Marijuana Law"
 names(df_wide)[names(df_wide) == "mm_date_active_medlegdisp"] = "Medical MJ Dispensaries Open"
 names(df_wide)[names(df_wide) == "mm_date_effREC"] = "Recreational Marijuana Law"
 names(df_wide)[names(df_wide) == "mm_date_active_dispREC"] = "Recreational MJ Store Open"
 
-# Co-prescribing
+# co-prescribing
 names(df_wide)[names(df_wide) == "copnal_date_all_prescribe"] = "Naloxone Co-prescribing\nMandating Prescription"
 
 # looking at the data
@@ -133,13 +132,13 @@ the file path to save the new plot at.
 # generating policy wheels
 plot_policy_wheels(data = df_wide,
                    
-                   # Ordering policies by name:
+                   # ordering policies by name:
                   policies = c("Any Naloxone Access Law (NAL)", "NAL Standing Order or Protocol", "NAL Prescriptive Authority", "Any Good Samaritan Law (GSL)", "GSL Arrest"),
                   
                   # name of the state variable
                   state_var = "state",
                   
-                  # Restrict to relevant policy intervals, for locations that implemented the policy
+                  # restrict to relevant policy intervals, for locations that implemented the policy
                   policy_intervals = c(2010, 2015, 2020),
                   plot_colors = c("#1f77b4", "#ff7f0e", "#FFFF00", "#dab8e5", "#9467bd"),
                   legend_args = list(x = "center", xjust = 0.5, y.intersp = 1.3, x.intersp = 1.3, cex = 2.5, pt.cex = 2.7, bty = "n", ncol = 2),
@@ -162,13 +161,13 @@ Referencing the graph, you can see that the ordering of the `policies` argument 
 # generating policy wheels
 plot_policy_wheels(data = df_wide,
                    
-                   # Ordering policies by name:
+                   # ordering policies by name:
                   policies = c("Any Naloxone Access Law (NAL)", "NAL Standing Order or Protocol", "NAL Prescriptive Authority", "Any Good Samaritan Law (GSL)", "GSL Arrest"),
                   
                   # name of the state variable
                   state_var = "state",
                   
-                  # Restrict to relevant policy intervals, for locations that implemented the policy
+                  # restrict to relevant policy intervals, for locations that implemented the policy
                   policy_intervals = c(2010, 2013, 2016, 2019, 2021),
                   plot_colors = c("#1f77b4", "#ff7f0e", "#FFFF00", "#dab8e5", "#9467bd"),
                   legend_args = list(x = "center", xjust = 0.5, y.intersp = 1.3, x.intersp = 1.3, cex = 2.5, pt.cex = 2.7, bty = "n", ncol = 2),
@@ -200,14 +199,14 @@ See another example of a policy wheel below:
 # generating policy wheels
 plot_policy_wheels(data = df_wide,
                    
-                   # Ordering policies by name:
+                   # ordering policies by name:
                   policies = c("Any Naloxone Access Law (NAL)", "NAL Standing Order or Protocol", "NAL Prescriptive Authority",
                     "Medical Marijuana Law", "Medical MJ Dispensaries Open", "Recreational Marijuana Law", "Recreational MJ Store Open"),
                   
                   # name of the state variable
                   state_var = "state",
                   
-                  # Restrict to relevant policy intervals, for locations that implemented the policy
+                  # restrict to relevant policy intervals, for locations that implemented the policy
                   policy_intervals = c(2012, 2015, 2018, 2021),
                   plot_colors = c("#1f77b4", "#ff7f0e", "#FFFF00", 
                                   "#f7a8a8", "#d62728", "#90EE90","#006400"),
@@ -230,23 +229,23 @@ knitr::include_graphics("www/policy_wheel_2.svg")
 
 ```
 
-In this example, we include data for 7 policies at 4 time points in 3 year intervals. Also, note that the `nrows` and `ncols` arguments were used to control the layout of the wheels. The result is a bit crowded, and we would recommend including fewer than 7, or even 6 policies in one of these plots. We can infer that most states effected a Naloxone Access Law (NAL) between 2012 and 2015 (blue). Many of these laws allowed the distribution of Naloxone through a standing or protocol order (orange), but most states did not pass laws allowing pharmacists prescriptive authority (yellow) until later. We can also see that the states in the West and North-East tended to pass these policies across the board earlier than states in the Midwest and South. Also notice that medicinal (red) and recreational (green) marijuana laws were passed around the same time (if not slightly after) NAL in many states.
+In this example, we include data for 7 policies at 4 time points in 3 year intervals. Also, note that the `nrows` and `ncols` arguments were used to control the layout of the wheels. The result is a bit crowded, and we would recommend including fewer than 7, or even 6 policies in one of these plots. We can infer that most states enacted some form of a Naloxone Access Law (NAL) between 2012 and 2015 (blue). Many of these NALs allowed the distribution of Naloxone through a standing or protocol order (orange), but most states did not pass laws allowing pharmacists prescriptive authority (yellow) until later in the time series. We can also see that the states in the West and North-East tended to pass these policies earlier than states in the Midwest and South. Also notice that medicinal (red) and recreational (green) marijuana laws were enacted around the same time (if not slightly after) NAL in many states.
 
-Lastly, create a plot that shows the association between the passage of NAL laws and Naloxone Co-prescribing Laws that mandate prescribing and affect all patients.
+Lastly, let's create a plot that shows the association between the commencement of NALs and Naloxone Co-prescribing Laws that mandate prescribing and affect all patients.
 
 ```{R message=FALSE}
 
 # generating policy wheels
 plot_policy_wheels(data = df_wide,
                    
-                   # Ordering policies by name:
+                   # ordering policies by name:
                   policies = c("Any Naloxone Access Law (NAL)", "NAL Standing Order or Protocol", "NAL Prescriptive Authority",
                     "Naloxone Co-prescribing\nMandating Prescription"),
                   
                   # name of the state variable
                   state_var = "state",
                   
-                  # Restrict to relevant policy intervals, for locations that implemented the policy
+                  # restrict to relevant policy intervals, for locations that implemented the policy
                   policy_intervals = c(2012, 2014, 2016, 2018, 2020, 2022),
                   plot_colors = c("#1f77b4", "#ff7f0e", "#FFFF00", 
                                   "#00b3b3"),

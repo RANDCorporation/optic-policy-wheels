@@ -8,7 +8,7 @@
 
 ### Description
 
-This repository contains code used to create policy wheel data visualizations as seen in OPTIC publications, e.g. Pessar, 2021 and Davis, 2024.
+This repository contains code used to create policy wheel data visualizations as seen in OPTIC (Opioid Policy Tools and Information Center) publications, e.g. Pessar, 2021 and Davis, 2024.
 
 ---
 
@@ -26,8 +26,8 @@ This repository contains code used to create policy wheel data visualizations as
 
 To reproduce the demo, follow these steps:
 
-1. pull this repository to your machine using [git pull](https://github.com/git-guides/git-pull) or by clicking the green drop down button that says code on this page, selecting `Download ZIP`, and unzipping that file somewhere on your computer.
-2. Make sure a [modern version of R and R Studio](https://posit.co/download/rstudio-desktop/) are installed on your computer (we use `R version 4.4.0`).
+1. Pull this repository to your machine using [git pull](https://github.com/git-guides/git-pull) or by clicking the green drop down button that says code on this page, selecting `Download ZIP`, and unzipping that file somewhere on your computer.
+2. Make sure a [modern version of R and R Studio](https://posit.co/download/rstudio-desktop/) are installed on your computer (we used `R version 4.4.0`).
 3. Make sure to have the proper toolchain installed: linux: GCC and GNU Make, mac: [xcode](https://developer.apple.com/xcode/resources/), windows: [rtools](https://cran.r-project.org/bin/windows/Rtools/rtools43/files/). Run `Sys.which("make")` from R to check that this was successful (if so, the path to the make executable will be returned.)
 4. Launch R Studio, and open the `policy_wheels.Rproj` in the repository you obtained in step 1. You can do this by navigating to `file`, `open file`, and double clicking on the project in RStudio's file explorer.
 5. Run the line `renv::restore()` in the console (lower left hand corner of R studio). This installs some software dependencies. Follow the instructions in the console until this is finished running. If this fails, try [updating R and R Studio](https://posit.co/download/rstudio-desktop/) (selecting all the default settings) and double check that you have the proper toolchain installed (step 4).
