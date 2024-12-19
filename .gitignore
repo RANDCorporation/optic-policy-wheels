@@ -20,3 +20,4 @@
 renv/library
 .Rproj.user
 app.R
+/.quarto/
