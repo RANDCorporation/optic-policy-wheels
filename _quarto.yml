@@ -1,3 +1,20 @@
 project:
   type: website
-  output-dir: docs
+  output-dir: "."
+
+website:
+  title: "OPTIC Policy Wheels"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - tutorial.qmd
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
+
+
+

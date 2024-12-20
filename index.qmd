@@ -1,65 +1,37 @@
 ---
-title: "Optic Policy Wheels Tutorial"
-author:
-  - name: Joshua Eagan
-    affiliations: 
-      - name: RAND Corporation, Santa Monica, California
-    orcid: 0000-0001-7058-1443
-  - name: Max Griswold
-    affiliations:
-      - name: RAND Corporation, Santa Monica, California
-    orcid: 0000-0002-6387-128X
-  - name: Beth Ann Griffin
-    affiliations:
-      - name: RAND Corporation, Arlington, Virginia
-    orcid: 0000-0002-2391-4601
-  - name: Pedro Nascimento de Lima
-    affiliations:
-      - name: RAND Corporation, Arlington, Virginia
-    orcid: 0000-0001-9057-198X
-  - name: Seema Choksy Pessar
-    affiliations:
-      - name: USC Schaeffer Center
-    orcid: 0000-0003-2942-3974
-  - name: Rosalie Liccardo Pacula
-    affiliations:
-      - name: USC Price School of Public Policy
-    orcid: 0000-0002-6145-9865
-  - name: Bradley Stein
-    affiliations:
-      - name: RAND Corporation, Pittsburgh, Pennsylvania
-    orcid: 0000-0003-1544-458X
-date: "`r Sys.Date()`"
-format:
-  html:
-    toc: true
+title: "OPTIC R Repository and Tutorial for Creating Policy Wheel Data Visualizations"
 ---
 
+This tutorial and code allows users to create OPTIC style policy wheel data visualizations that illustrate the timeline over which state policies are implemented concurrently.
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, warning = FALSE)
-```
+## Background and Rationale
 
-# Introduction
+This OPTIC R tutorial for creating policy wheel data visualizations allows users to create OPTIC style policy wheel data visualizations in R that illustrate the timeline over which state policies are implemented concurrently. Policy wheel data visualizations as seen in OPTIC publications[1].
 
-This tutorial demonstrates the creation of OPTIC (Opioid Policy Tools and Information Center) style policy wheel data visualizations. These graphs are meant to illustrate the timeline over which state level policies are implemented concurrently. For some examples of these data visualizations, skip to the middle of this tutorial.
+## Installation
 
--------------------------------------------
+You will need R (version 4.1.0 or above) to use this package[1].
 
-# Setup
+**Programs:**
+- `demo.Rmd` - This R Markdown tutorial demonstrates how to create policy wheel data visualizations
+- `setup_example_data.R` - This script was used to create the input data for demo.Rmd
+- `R/make_policy_wheel.R` - This program creates policy wheel data visualizations with custom user data
+- `R/plot_policy_wheel_internal.R` - This function creates the circular shell for each individual policy wheel
+- `R/fill_in_cells.R` - Takes the user data and fills each cell of the policy wheel
 
-To create one of these graphs, you first need to load in a few R packages: 
+## Usage
 
-* `circlize` (Gu, Z., 2014)
-* `data.table` (Srinivasan, 2023)
-* `plyr` (Grolemund, 2011)
-* `lubridate` (Grolemund, 2011)
+### Setup
 
-You also need to load in the appropriate functions from this project's working directory- we did this below using `source`.
+Required R packages:
+- circlize
+- data.table
+- plyr
+- lubridate
 
+Load the packages and functions:
 
-```{r message=FALSE}
-
+```r
 # loading packages
 suppressPackageStartupMessages(library(circlize))
 library(data.table)
@@ -70,238 +42,32 @@ library(lubridate)
 source("R/fill_in_cells.R")
 source("R/make_policy_wheel.R")
 source("R/plot_policy_wheel_internal.R")
-
 ```
 
-The R function we use to plot policy wheels is `plot_policy_wheels`. 
+## Instructions
 
--------------------------------------------
+1. Pull this repository using git pull or download ZIP
+2. Install R version 4.4.0 or newer and R Studio
+3. Install proper toolchain:
+   - Linux: GCC and GNU Make
+   - Mac: xcode
+   - Windows: rtools
+4. Open policy_wheels.Rproj in R Studio
+5. Run `renv::restore()` in console
+6. Open and run demo.Rmd
 
-# Plotting Policy wheels
+## License
 
-Next, you need to load in your data. In the code below, we load in a wide version of the data, meaning that there is one row for each state (50 states and DC) and a column for each policy, containing the date each policy was implemented for each state. Next, we rename columns in the wide data so variables are named with the text we want displayed in the graphs.
+Copyright (C) 2024 by The RAND Corporation. Released as open-source software under GPL-3.0 license[1].
 
-```{r}
+## About
 
-# reading in a data frame where rows are states, columns are policies, and values are enactment dates
+This research was supported through a National Institute on Drug Abuse grant (P50DA046351) to the RAND Corporation and carried out within the Access and Delivery Program in RAND Health Care[1].
 
-# Dates can come in the forms: "1/15/2015", "2015-01-15", "2015", or "January 15, 2015"
-df_wide <- read.csv('Data/processed/example_data_wide.csv')
-names(df_wide) = gsub("\\.", " ", names(df_wide))
+## Contact
 
-# renaming variables
-names(df_wide)[names(df_wide) == "nal_date_any_nal"] = "Any Naloxone Access Law (NAL)"
-names(df_wide)[names(df_wide) == "nal_date_nal_protocol_standing"] = "NAL Standing Order or Protocol"
-names(df_wide)[names(df_wide) == "nal_date_nal_Rx_prescriptive_auth"] = "NAL Prescriptive Authority"
+For questions related to this repository, contact Beth Ann Griffin or Joshua Eagan[1].
 
-# all NAL laws and GSL
-names(df_wide)[names(df_wide) == "gsl_date_anygsl"] = "Any Good Samaritan Law (GSL)"
-names(df_wide)[names(df_wide) == "gsl_date_gsl_arrest"] = "GSL Arrest"
-
-# NAL laws and medical/rec cannabis access 
-names(df_wide)[names(df_wide) == "mm_date_effMML"] = "Medical Marijuana Law"
-names(df_wide)[names(df_wide) == "mm_date_active_medlegdisp"] = "Medical MJ Dispensaries Open"
-names(df_wide)[names(df_wide) == "mm_date_effREC"] = "Recreational Marijuana Law"
-names(df_wide)[names(df_wide) == "mm_date_active_dispREC"] = "Recreational MJ Store Open"
-
-# co-prescribing
-names(df_wide)[names(df_wide) == "copnal_date_all_prescribe"] = "Naloxone Co-prescribing\nMandating Prescription"
-
-# looking at the data
-head(df_wide)
-
-```
-
-
-Once the data are clean, you can run `plot_policy_wheels` to make your graph. This function takes the following arguments:
-
-**data** 
-a dataframe - this should be wide dataset; rows are states and columns contain the dates each policy was passed. Dates can be in the form of "1/15/2015", "2015-01-15", "2015", or "January 15, 2015"- only the year will be kept.
-
-**policies** 
-a character vector containing the names of the policy variables you would like contained in your policy wheels.
-
-**state_var** 
-a string- the name of the variable identifying states by their two letter abbreviation (all caps).
-
-**policy_intervals** 
-a numeric vector stating the time points to create policy wheels for.
-
-**nrows** 
-how many rows of policy wheels should be included? defaults to `ceiling(length(policy_intervals)/3)`.
-
-**ncols** 
-how many columns of policy wheels should be included? defaults to 3.
-
-**panel_width** 
-how wide should each panel (each panel contains a policy wheel) be?
-
-**panel_height** 
-how tall should each panel be?
-
-**byrow** 
-T/F- should wheels be ordered by rows (horizontally) or by columns (vertically)?
-
-**plot_colors** 
-character vector containing the names of the colors corresponding with each policy.
-
-**plot_width** 
-how wide should the plot be in total?
-
-**plot_height** 
-how tall should the plot be in total (including legend).
-
-**legend_args** 
-extra arguments to be passed on to `legend`. See `?legend` for more details.
-
-**out_file** 
-the file path to save the new plot at.
-
-
-```{r message=FALSE}
-
-# generating policy wheels
-plot_policy_wheels(data = df_wide,
-                   
-                   # ordering policies by name:
-                  policies = c("Any Naloxone Access Law (NAL)", "NAL Standing Order or Protocol", "NAL Prescriptive Authority", "Any Good Samaritan Law (GSL)", "GSL Arrest"),
-                  
-                  # name of the state variable
-                  state_var = "state",
-                  
-                  # restrict to relevant policy intervals, for locations that implemented the policy
-                  policy_intervals = c(2010, 2015, 2020),
-                  plot_colors = c("#1f77b4", "#ff7f0e", "#FFFF00", "#dab8e5", "#9467bd"),
-                  legend_args = list(x = "center", xjust = 0.5, y.intersp = 1.3, x.intersp = 1.3, cex = 2.5, pt.cex = 2.7, bty = "n", ncol = 2),
-                  
-                  panel_width = 4,
-                  panel_height = 5,
-                  
-                  # where should the graph be saved?
-                  out_file = "www/policy_wheel_1.svg")
-
-# displaying the new graph
-knitr::include_graphics("www/policy_wheel_1.svg")
-
-```
-
-Referencing the graph, you can see that the ordering of the `policies` argument corresponds to the ordering of `plot_colors`. The policy enactment dates in `df` were converted to years and split across 3 separate wheels according to `policy_intervals`. One important thing to note is that policies that were passed before the first year of `policy_intervals` are still included in the graph. There is an interesting amount of variation in the "in-between" years (2011-2014 and 2016-2019)- so increasing the amount of years displayed might better illustrate these trends. You can see an example of this change below.
-
-```{r message=FALSE}
-
-# generating policy wheels
-plot_policy_wheels(data = df_wide,
-                   
-                   # ordering policies by name:
-                  policies = c("Any Naloxone Access Law (NAL)", "NAL Standing Order or Protocol", "NAL Prescriptive Authority", "Any Good Samaritan Law (GSL)", "GSL Arrest"),
-                  
-                  # name of the state variable
-                  state_var = "state",
-                  
-                  # restrict to relevant policy intervals, for locations that implemented the policy
-                  policy_intervals = c(2010, 2013, 2016, 2019, 2021),
-                  plot_colors = c("#1f77b4", "#ff7f0e", "#FFFF00", "#dab8e5", "#9467bd"),
-                  legend_args = list(x = "center", xjust = 0.5, y.intersp = 1.3, x.intersp = 1.3, cex = 2.5, pt.cex = 2.7, bty = "n", ncol = 2),
-                  
-                  panel_width = 4,
-                  panel_height = 5,
-                  
-                  nrows = 2,
-                  ncols = 3,
-                  
-                  # where should the graph be saved?
-                  out_file = "www/policy_wheel_1_revised.svg")
-
-# displaying the new graph
-knitr::include_graphics("www/policy_wheel_1_revised.svg")
-
-```
-
-If you are making your own plots, you can also edit the following settings:
-
-
-* `plot_width` and `plot_height`: these edit the dimensions of the plot output and will need to be adjusted according to your needs.
-* `legend_args`: this is a list whose elements will be passed to `graphics::legend()`. Within the function, two arguments are already configured for you, `legend` and `col`, but it's up to you to configure the remaining. The defaults are probably fine here, but if you want to change anything, refer to `?graphics::legend`.
-
-See another example of a policy wheel below:
-
-```{R message=FALSE}
-
-# generating policy wheels
-plot_policy_wheels(data = df_wide,
-                   
-                   # ordering policies by name:
-                  policies = c("Any Naloxone Access Law (NAL)", "NAL Standing Order or Protocol", "NAL Prescriptive Authority",
-                    "Medical Marijuana Law", "Medical MJ Dispensaries Open", "Recreational Marijuana Law", "Recreational MJ Store Open"),
-                  
-                  # name of the state variable
-                  state_var = "state",
-                  
-                  # restrict to relevant policy intervals, for locations that implemented the policy
-                  policy_intervals = c(2012, 2015, 2018, 2021),
-                  plot_colors = c("#1f77b4", "#ff7f0e", "#FFFF00", 
-                                  "#f7a8a8", "#d62728", "#90EE90","#006400"),
-                  legend_args = list(x = "center", xjust = 0.5, y.intersp = 1.3, x.intersp = 1.3, cex = 2.5, pt.cex = 2.7, bty = "n", ncol = 2),
-                  
-                  plot_width = 22, 
-                  plot_height = 16,
-                  
-                  nrows = 2,
-                  ncols = 2,
-                  panel_width = 5,
-                  panel_height = 6,
-                  
-                  # where should the graph be saved?
-                  out_file = "www/policy_wheel_2.svg")
-
-# displaying the new graph
-knitr::include_graphics("www/policy_wheel_2.svg")
-
-
-```
-
-In this example, we include data for 7 policies at 4 time points in 3 year intervals. Also, note that the `nrows` and `ncols` arguments were used to control the layout of the wheels. The result is a bit crowded, and we would recommend including fewer than 7, or even 6 policies in one of these plots. We can infer that most states enacted some form of a Naloxone Access Law (NAL) between 2012 and 2015 (blue). Many of these NALs allowed the distribution of Naloxone through a standing or protocol order (orange), but most states did not pass laws allowing pharmacists prescriptive authority (yellow) until later in the time series. We can also see that the states in the West and North-East tended to pass these policies earlier than states in the Midwest and South. Also notice that medicinal (red) and recreational (green) marijuana laws were enacted around the same time (if not slightly after) NAL in many states.
-
-Lastly, let's create a plot that shows the association between the commencement of NALs and Naloxone Co-prescribing Laws that mandate prescribing and affect all patients.
-
-```{R message=FALSE}
-
-# generating policy wheels
-plot_policy_wheels(data = df_wide,
-                   
-                   # ordering policies by name:
-                  policies = c("Any Naloxone Access Law (NAL)", "NAL Standing Order or Protocol", "NAL Prescriptive Authority",
-                    "Naloxone Co-prescribing\nMandating Prescription"),
-                  
-                  # name of the state variable
-                  state_var = "state",
-                  
-                  # restrict to relevant policy intervals, for locations that implemented the policy
-                  policy_intervals = c(2012, 2014, 2016, 2018, 2020, 2022),
-                  plot_colors = c("#1f77b4", "#ff7f0e", "#FFFF00", 
-                                  "#00b3b3"),
-                  legend_args = list(x = "center", xjust = 0.5, y.intersp = 1.3, x.intersp = 1.3, cex = 2.5, pt.cex = 2.7, bty = "n", ncol = 2),
-                  
-                  plot_width = 22, 
-                  plot_height = 16,
-                  
-                  panel_width = 5,
-                  panel_height = 6,
-                  
-                  # where should the graph be saved?
-                  out_file = "www/policy_wheel_3.svg")
-
-# displaying the new graph
-knitr::include_graphics("www/policy_wheel_3.svg")
-
-
-```
-
--------------------------------------------
-
-# Sources:
-
-* Gu, Z. circlize implements and enhances circular visualization in R. Bioinformatics 2014.
-* Garrett Grolemund, Hadley Wickham (2011). Dates and Times Made Easy with lubridate. Journal of Statistical Software, 40(3), 1-25. URL https://www.jstatsoft.org/v40/i03/
-* Dowle M, Srinivasan A (2023). _data.table: Extension of `data.frame`_. R package version 1.14.8, <https://CRAN.R-project.org/package=data.table>
-* Hadley Wickham (2011). The Split-Apply-Combine Strategy for Data Analysis. Journal of Statistical Software, 40(1), 1-29. URL https://www.jstatsoft.org/v40/i01/.
+Citations:
+[1] https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/6736068/7232d0df-6f32-42c1-9099-815aa7753d73/pkg-TL-A3054-1-OPTIC-R-Repository-and-Tutorial-for-Creating-Policy-Wheel-Data-Visualizations.docx
+[2] https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/6736068/7232d0df-6f32-42c1-9099-815aa7753d73/pkg-TL-A3054-1-OPTIC-R-Repository-and-Tutorial-for-Creating-Policy-Wheel-Data-Visualizations.docx
