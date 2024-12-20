@@ -2,11 +2,9 @@
 title: "OPTIC R Repository and Tutorial for Creating Policy Wheel Data Visualizations"
 ---
 
-This [code repository](https://github.com/RANDCorporation/optic-policy-wheels) and [tutorial](tutorial.qmd) allow users to create OPTIC style policy wheel data visualizations that illustrate the timeline over which state policies are implemented concurrently using R.
+This [code repository](https://github.com/RANDCorporation/optic-policy-wheels) and [tutorial](tutorial.qmd) allow users to create OPTIC-style policy wheel data visualizations that illustrate the timeline over which state policies are implemented, like the one below:
 
-## Usage
-
-See the [tutorial](tutorial.qmd).
+![Example Policy Wheel showing the adoption of Opioid Control Policies](www/policy_wheel_1.svg)
 
 ## Quick-start guide
 

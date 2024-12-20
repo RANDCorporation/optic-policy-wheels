@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "OPTIC R Repository and Tutorial for Creating Policy Wheel Data Visualizations",
     "section": "",
-    "text": "This code repository and tutorial allow users to create OPTIC style policy wheel data visualizations that illustrate the timeline over which state policies are implemented concurrently using R."
+    "text": "This code repository and tutorial allow users to create OPTIC style policy wheel data visualizations that illustrate the timeline over which state policies are implemented concurrently using R, like so:"
   },
   {
     "objectID": "index.html#background-and-rationale",
