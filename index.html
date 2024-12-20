@@ -20,40 +20,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -138,16 +104,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#background-and-rationale" id="toc-background-and-rationale" class="nav-link active" data-scroll-target="#background-and-rationale">Background and Rationale</a></li>
-  <li><a href="#installation" id="toc-installation" class="nav-link" data-scroll-target="#installation">Installation</a></li>
-  <li><a href="#usage" id="toc-usage" class="nav-link" data-scroll-target="#usage">Usage</a>
-  <ul class="collapse">
-  <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup">Setup</a></li>
-  </ul></li>
-  <li><a href="#instructions" id="toc-instructions" class="nav-link" data-scroll-target="#instructions">Instructions</a></li>
-  <li><a href="#license" id="toc-license" class="nav-link" data-scroll-target="#license">License</a></li>
-  <li><a href="#about" id="toc-about" class="nav-link" data-scroll-target="#about">About</a></li>
+  <li><a href="#usage" id="toc-usage" class="nav-link active" data-scroll-target="#usage">Usage</a></li>
+  <li><a href="#quick-start-guide" id="toc-quick-start-guide" class="nav-link" data-scroll-target="#quick-start-guide">Quick-start guide</a></li>
+  <li><a href="#about-this-tool" id="toc-about-this-tool" class="nav-link" data-scroll-target="#about-this-tool">About this Tool</a></li>
   <li><a href="#contact" id="toc-contact" class="nav-link" data-scroll-target="#contact">Contact</a></li>
+  <li><a href="#license" id="toc-license" class="nav-link" data-scroll-target="#license">License</a></li>
   </ul>
 </nav>
     </div>
@@ -171,62 +132,38 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<p>This tutorial and code allows users to create OPTIC style policy wheel data visualizations that illustrate the timeline over which state policies are implemented concurrently.</p>
-<section id="background-and-rationale" class="level2">
-<h2 class="anchored" data-anchor-id="background-and-rationale">Background and Rationale</h2>
-<p>This OPTIC R tutorial for creating policy wheel data visualizations allows users to create OPTIC style policy wheel data visualizations in R that illustrate the timeline over which state policies are implemented concurrently. Policy wheel data visualizations as seen in OPTIC publications[1].</p>
-</section>
-<section id="installation" class="level2">
-<h2 class="anchored" data-anchor-id="installation">Installation</h2>
-<p>You will need R (version 4.1.0 or above) to use this package[1].</p>
-<p><strong>Programs:</strong> - <code>demo.Rmd</code> - This R Markdown tutorial demonstrates how to create policy wheel data visualizations - <code>setup_example_data.R</code> - This script was used to create the input data for demo.Rmd - <code>R/make_policy_wheel.R</code> - This program creates policy wheel data visualizations with custom user data - <code>R/plot_policy_wheel_internal.R</code> - This function creates the circular shell for each individual policy wheel - <code>R/fill_in_cells.R</code> - Takes the user data and fills each cell of the policy wheel</p>
-</section>
+<p>This <a href="https://github.com/RANDCorporation/optic-policy-wheels">code repository</a> and <a href="./tutorial.html">tutorial</a> allow users to create OPTIC style policy wheel data visualizations that illustrate the timeline over which state policies are implemented concurrently using R.</p>
 <section id="usage" class="level2">
 <h2 class="anchored" data-anchor-id="usage">Usage</h2>
-<section id="setup" class="level3">
-<h3 class="anchored" data-anchor-id="setup">Setup</h3>
-<p>Required R packages: - circlize - data.table - plyr - lubridate</p>
-<p>Load the packages and functions:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># loading packages</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(circlize))</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(data.table)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plyr)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># loading functions</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"R/fill_in_cells.R"</span>)</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"R/make_policy_wheel.R"</span>)</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"R/plot_policy_wheel_internal.R"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>See the <a href="./tutorial.html">tutorial</a>.</p>
 </section>
-</section>
-<section id="instructions" class="level2">
-<h2 class="anchored" data-anchor-id="instructions">Instructions</h2>
-<ol type="1">
-<li>Pull this repository using git pull or download ZIP</li>
-<li>Install R version 4.4.0 or newer and R Studio</li>
-<li>Install proper toolchain:
+<section id="quick-start-guide" class="level2">
+<h2 class="anchored" data-anchor-id="quick-start-guide">Quick-start guide</h2>
 <ul>
-<li>Linux: GCC and GNU Make</li>
-<li>Mac: xcode</li>
-<li>Windows: rtools</li>
-</ul></li>
-<li>Open policy_wheels.Rproj in R Studio</li>
-<li>Run <code>renv::restore()</code> in console</li>
-<li>Open and run demo.Rmd</li>
-</ol>
+<li>Clone the <a href="https://github.com/RANDCorporation/optic-policy-wheels">code repository</a></li>
+<li>Open the policy_wheels.Rproj file using an up-to-date version of <a href="https://posit.co/download/rstudio-desktop/">RStudio</a></li>
+<li>Step through the <a href="./tutorial.html">tutorial</a></li>
+<li>Reuse the functions in the R folder in your own project</li>
+</ul>
+</section>
+<section id="about-this-tool" class="level2">
+<h2 class="anchored" data-anchor-id="about-this-tool">About this Tool</h2>
+<p>This research was financially supported through a National Institute on Drug Abuse grant (P50DA046351) to the RAND Corporation and carried out within the Access and Delivery Program in RAND Health Care.</p>
+<p>RAND Health Care, a division of the RAND Corporation, promotes healthier societies by improving health care systems in the United States and other countries. We do this by providing health care decisionmakers, practitioners, and consumers with actionable, rigorous, objective evidence to support their most complex decisions. For more information, see <a href="https://www.rand.org/health-care">www.rand.org/health-care</a>, or contact</p>
+<p><strong>RAND Health Care Communications</strong><br>
+1776 Main Street<br>
+P.O. Box 2138<br>
+Santa Monica, CA 90407-2138<br>
+(310) 393-0411, ext. 7775<br>
+<a href="mailto:RAND_Health-Care@rand.org" class="email">RAND_Health-Care@rand.org</a></p>
+</section>
+<section id="contact" class="level2">
+<h2 class="anchored" data-anchor-id="contact">Contact</h2>
+<p>For questions related to this repository, contact Beth Ann Griffin or Joshua Eagan.</p>
 </section>
 <section id="license" class="level2">
 <h2 class="anchored" data-anchor-id="license">License</h2>
 <p>Copyright (C) 2024 by The RAND Corporation. Released as open-source software under GPL-3.0 license[1].</p>
-</section>
-<section id="about" class="level2">
-<h2 class="anchored" data-anchor-id="about">About</h2>
-<p>This research was supported through a National Institute on Drug Abuse grant (P50DA046351) to the RAND Corporation and carried out within the Access and Delivery Program in RAND Health Care[1].</p>
-</section>
-<section id="contact" class="level2">
-<h2 class="anchored" data-anchor-id="contact">Contact</h2>
-<p>For questions related to this repository, contact Beth Ann Griffin or Joshua Eagan[1].</p>
-<p>Citations: [1] https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/6736068/7232d0df-6f32-42c1-9099-815aa7753d73/pkg-TL-A3054-1-OPTIC-R-Repository-and-Tutorial-for-Creating-Policy-Wheel-Data-Visualizations.docx [2] https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/6736068/7232d0df-6f32-42c1-9099-815aa7753d73/pkg-TL-A3054-1-OPTIC-R-Repository-and-Tutorial-for-Creating-Policy-Wheel-Data-Visualizations.docx</p>
 
 
 </section>

@@ -2,72 +2,44 @@
 title: "OPTIC R Repository and Tutorial for Creating Policy Wheel Data Visualizations"
 ---
 
-This tutorial and code allows users to create OPTIC style policy wheel data visualizations that illustrate the timeline over which state policies are implemented concurrently.
-
-## Background and Rationale
-
-This OPTIC R tutorial for creating policy wheel data visualizations allows users to create OPTIC style policy wheel data visualizations in R that illustrate the timeline over which state policies are implemented concurrently. Policy wheel data visualizations as seen in OPTIC publications[1].
-
-## Installation
-
-You will need R (version 4.1.0 or above) to use this package[1].
-
-**Programs:**
-- `demo.Rmd` - This R Markdown tutorial demonstrates how to create policy wheel data visualizations
-- `setup_example_data.R` - This script was used to create the input data for demo.Rmd
-- `R/make_policy_wheel.R` - This program creates policy wheel data visualizations with custom user data
-- `R/plot_policy_wheel_internal.R` - This function creates the circular shell for each individual policy wheel
-- `R/fill_in_cells.R` - Takes the user data and fills each cell of the policy wheel
+This [code repository](https://github.com/RANDCorporation/optic-policy-wheels) and [tutorial](tutorial.qmd) allow users to create OPTIC style policy wheel data visualizations that illustrate the timeline over which state policies are implemented concurrently using R.
 
 ## Usage
 
-### Setup
+See the [tutorial](tutorial.qmd).
 
-Required R packages:
-- circlize
-- data.table
-- plyr
-- lubridate
+## Quick-start guide
 
-Load the packages and functions:
+- Clone the [code repository](https://github.com/RANDCorporation/optic-policy-wheels)
+- Open the policy_wheels.Rproj file using an up-to-date version of [RStudio](https://posit.co/download/rstudio-desktop/)
+- Step through the [tutorial](tutorial.qmd)
+- Reuse the functions in the R folder in your own project
 
-```r
-# loading packages
-suppressPackageStartupMessages(library(circlize))
-library(data.table)
-library(plyr)
-library(lubridate)
+## About this Tool
 
-# loading functions
-source("R/fill_in_cells.R")
-source("R/make_policy_wheel.R")
-source("R/plot_policy_wheel_internal.R")
-```
+This research was financially supported through a National Institute on
+Drug Abuse grant (P50DA046351) to the RAND Corporation and carried out
+within the Access and Delivery Program in RAND Health Care.
 
-## Instructions
+RAND Health Care, a division of the RAND Corporation, promotes healthier
+societies by improving health care systems in the United States and
+other countries. We do this by providing health care decisionmakers,
+practitioners, and consumers with actionable, rigorous, objective
+evidence to support their most complex decisions. For more information,
+see [www.rand.org/health-care](https://www.rand.org/health-care), or
+contact
 
-1. Pull this repository using git pull or download ZIP
-2. Install R version 4.4.0 or newer and R Studio
-3. Install proper toolchain:
-   - Linux: GCC and GNU Make
-   - Mac: xcode
-   - Windows: rtools
-4. Open policy_wheels.Rproj in R Studio
-5. Run `renv::restore()` in console
-6. Open and run demo.Rmd
+**RAND Health Care Communications**  
+1776 Main Street  
+P.O. Box 2138  
+Santa Monica, CA 90407-2138  
+(310) 393-0411, ext. 7775  
+<RAND_Health-Care@rand.org>
+
+## Contact
+
+For questions related to this repository, contact Beth Ann Griffin or Joshua Eagan.
 
 ## License
 
 Copyright (C) 2024 by The RAND Corporation. Released as open-source software under GPL-3.0 license[1].
-
-## About
-
-This research was supported through a National Institute on Drug Abuse grant (P50DA046351) to the RAND Corporation and carried out within the Access and Delivery Program in RAND Health Care[1].
-
-## Contact
-
-For questions related to this repository, contact Beth Ann Griffin or Joshua Eagan[1].
-
-Citations:
-[1] https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/6736068/7232d0df-6f32-42c1-9099-815aa7753d73/pkg-TL-A3054-1-OPTIC-R-Repository-and-Tutorial-for-Creating-Policy-Wheel-Data-Visualizations.docx
-[2] https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/6736068/7232d0df-6f32-42c1-9099-815aa7753d73/pkg-TL-A3054-1-OPTIC-R-Repository-and-Tutorial-for-Creating-Policy-Wheel-Data-Visualizations.docx

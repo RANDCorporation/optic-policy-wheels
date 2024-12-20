@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "OPTIC R Repository and Tutorial for Creating Policy Wheel Data Visualizations",
     "section": "",
-    "text": "This tutorial and code allows users to create OPTIC style policy wheel data visualizations that illustrate the timeline over which state policies are implemented concurrently."
+    "text": "This code repository and tutorial allow users to create OPTIC style policy wheel data visualizations that illustrate the timeline over which state policies are implemented concurrently using R."
   },
   {
     "objectID": "index.html#background-and-rationale",
@@ -25,7 +25,7 @@
     "href": "index.html#usage",
     "title": "OPTIC R Repository and Tutorial for Creating Policy Wheel Data Visualizations",
     "section": "Usage",
-    "text": "Usage\n\nSetup\nRequired R packages: - circlize - data.table - plyr - lubridate\nLoad the packages and functions:\n# loading packages\nsuppressPackageStartupMessages(library(circlize))\nlibrary(data.table)\nlibrary(plyr)\nlibrary(lubridate)\n\n# loading functions\nsource(\"R/fill_in_cells.R\")\nsource(\"R/make_policy_wheel.R\")\nsource(\"R/plot_policy_wheel_internal.R\")"
+    "text": "Usage\nSee the tutorial."
   },
   {
     "objectID": "index.html#instructions",
@@ -53,7 +53,7 @@
     "href": "index.html#contact",
     "title": "OPTIC R Repository and Tutorial for Creating Policy Wheel Data Visualizations",
     "section": "Contact",
-    "text": "Contact\nFor questions related to this repository, contact Beth Ann Griffin or Joshua Eagan[1].\nCitations: [1] https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/6736068/7232d0df-6f32-42c1-9099-815aa7753d73/pkg-TL-A3054-1-OPTIC-R-Repository-and-Tutorial-for-Creating-Policy-Wheel-Data-Visualizations.docx [2] https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/6736068/7232d0df-6f32-42c1-9099-815aa7753d73/pkg-TL-A3054-1-OPTIC-R-Repository-and-Tutorial-for-Creating-Policy-Wheel-Data-Visualizations.docx"
+    "text": "Contact\nFor questions related to this repository, contact Beth Ann Griffin or Joshua Eagan."
   },
   {
     "objectID": "tutorial.html",
@@ -89,5 +89,26 @@
     "title": "OPTIC Policy Wheels",
     "section": "",
     "text": "Download date: 10/31/2023\n\nCo-prescribing NAL- https://www.rand.org/content/dam/rand/pubs/external_publications/EP60000/EP68090/RAND_EP68090_Coprescrib-NAL.zip\nGSL- https://www.rand.org/content/dam/rand/pubs/external_publications/EP60000/EP68218/RAND_EP68218-GSL.zip\nNAL- https://www.rand.org/content/dam/rand/pubs/external_publications/EP60000/EP68090/RAND_EP68090-NAL.zip\nIMD- https://www.rand.org/content/dam/rand/pubs/external_publications/EP60000/EP69157/RAND_EP69157-IMD.zip\nMedical Marijuana Policy Data- https://www.rand.org/content/dam/rand/pubs/external_publications/EP60000/EP67480/RAND_EP67480-MMPD.zip\nOBBT- https://www.rand.org/content/dam/rand/pubs/external_publications/EP60000/EP68648/RAND_EP68648-OBBT.zip\nPDMP 12-2020- https://www.rand.org/content/dam/rand/pubs/external_publications/EP60000/EP68218/RAND_EP68218-PDMP.zip"
+  },
+  {
+    "objectID": "index.html#quick-start-guide",
+    "href": "index.html#quick-start-guide",
+    "title": "OPTIC R Repository and Tutorial for Creating Policy Wheel Data Visualizations",
+    "section": "Quick-start guide",
+    "text": "Quick-start guide\n\nClone the code repository\nOpen the policy_wheels.Rproj file using an up-to-date version of RStudio\nStep through the tutorial\nReuse the functions in the R folder in your own project"
+  },
+  {
+    "objectID": "index.html#funding",
+    "href": "index.html#funding",
+    "title": "OPTIC R Repository and Tutorial for Creating Policy Wheel Data Visualizations",
+    "section": "Funding",
+    "text": "Funding\nThis research was supported through a National Institute on Drug Abuse grant (P50DA046351) to the RAND Corporation and carried out within the Access and Delivery Program in RAND Health Care[1]."
+  },
+  {
+    "objectID": "index.html#about-this-tool",
+    "href": "index.html#about-this-tool",
+    "title": "OPTIC R Repository and Tutorial for Creating Policy Wheel Data Visualizations",
+    "section": "About this Tool",
+    "text": "About this Tool\nThis research was financially supported through a National Institute on Drug Abuse grant (P50DA046351) to the RAND Corporation and carried out within the Access and Delivery Program in RAND Health Care.\nRAND Health Care, a division of the RAND Corporation, promotes healthier societies by improving health care systems in the United States and other countries. We do this by providing health care decisionmakers, practitioners, and consumers with actionable, rigorous, objective evidence to support their most complex decisions. For more information, see www.rand.org/health-care, or contact\nRAND Health Care Communications\n1776 Main Street\nP.O. Box 2138\nSanta Monica, CA 90407-2138\n(310) 393-0411, ext. 7775\nRAND_Health-Care@rand.org"
   }
 ]
