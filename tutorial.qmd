@@ -2,33 +2,13 @@
 title: "Tutorial"
 author:
   - name: Joshua Eagan
-    affiliations: 
-      - name: RAND Corporation, Santa Monica, California
-    orcid: 0000-0001-7058-1443
   - name: Max Griswold
-    affiliations:
-      - name: RAND Corporation, Santa Monica, California
-    orcid: 0000-0002-6387-128X
   - name: Beth Ann Griffin
-    affiliations:
-      - name: RAND Corporation, Arlington, Virginia
-    orcid: 0000-0002-2391-4601
+  - name: Hanna Han
   - name: Pedro Nascimento de Lima
-    affiliations:
-      - name: RAND Corporation, Arlington, Virginia
-    orcid: 0000-0001-9057-198X
   - name: Seema Choksy Pessar
-    affiliations:
-      - name: USC Schaeffer Center
-    orcid: 0000-0003-2942-3974
   - name: Rosalie Liccardo Pacula
-    affiliations:
-      - name: USC Price School of Public Policy
-    orcid: 0000-0002-6145-9865
   - name: Bradley Stein
-    affiliations:
-      - name: RAND Corporation, Pittsburgh, Pennsylvania
-    orcid: 0000-0003-1544-458X
 date: "`r Sys.Date()`"
 format:
   html:
