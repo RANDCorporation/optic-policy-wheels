@@ -2,18 +2,18 @@
 title: "OPTIC R Repository and Tutorial for Creating Policy Wheel Data Visualizations"
 ---
 
-This [code repository](https://github.com/RANDCorporation/optic-policy-wheels) and [tutorial](tutorial.qmd) allow users to create OPTIC-style policy wheel data visualizations that illustrate the timeline over which state policies are implemented, like the one below:
+This [code repository](https://github.com/RANDCorporation/optic-policy-wheels) (and its [tutorial](tutorial.qmd)) allows users to create Opioid Policy Tools and Information Center (OPTIC)-style policy wheel data visualizations that illustrate the timeline over which state policies are implemented, like the one below:
 
-![Example Policy Wheel showing the adoption of Opioid Control Policies](www/policy_wheel_1.svg)
+![Example policy wheel showing the adoption of opioid control policies](www/policy_wheel_1.svg)
 
-## Quick-start guide
+## Quick-Start Guide
 
-- Clone the [code repository](https://github.com/RANDCorporation/optic-policy-wheels)
-- Open the policy_wheels.Rproj file using an up-to-date version of [RStudio](https://posit.co/download/rstudio-desktop/)
-- Step through the [tutorial](tutorial.qmd)
-- Reuse the functions in the R folder in your own project
+- Clone the [code repository](https://github.com/RANDCorporation/optic-policy-wheels).
+- Open the policy_wheels.Rproj file using an up-to-date version of [RStudio](https://posit.co/download/rstudio-desktop/).
+- Step through the [tutorial](tutorial.qmd).
+- Reuse the functions in the R folder in your own project.
 
-## About this Tool
+## About This Tool
 
 This research was financially supported through a National Institute on
 Drug Abuse grant (P50DA046351) to RAND and carried out
@@ -36,8 +36,8 @@ Santa Monica, CA 90407-2138
 
 ## Contact
 
-For questions related to this repository, contact Beth Ann Griffin or Joshua Eagan.
+For questions related to this repository, contact [Beth Ann Griffin](bethg@rand.org) or [Joshua Eagan](jeagan@rand.org).
 
 ## License
 
-Copyright (C) 2024 by The RAND Corporation. Released as open-source software under GPL-3.0 license[1].
+Copyright (C) 2024 by The RAND Corporation. Released as open-source software under [GPL-3.0 license](https://www.r-project.org/Licenses/GPL-3).

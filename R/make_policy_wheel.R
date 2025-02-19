@@ -24,6 +24,7 @@
 #' @param plot_height how tall should the plot be in total (including legend)
 #' @param legend_args extra arguments to be passed on to `legend`. See `?legend` for more details
 #' @param out_file the file path to save the new plot at.
+#' @param font_size How big should the text on the plot be (states and regions)? 1 works well for the defaults- scale this up or down to change the text size
 #'
 #' @return
 #' @export 
@@ -45,6 +46,7 @@ plot_policy_wheels = function(data,
                                                  xjust = 0.5, y.intersp = 1.3, 
                                                  x.intersp = 1.3, cex = 3, 
                                                  pt.cex = 2.7, bty = "n", ncol = 2),
+                              font_size=1,
                               out_file = NULL){
 
         # some error catching
@@ -116,7 +118,7 @@ plot_policy_wheels = function(data,
             svg(filename = out_file,
                 width = plot_width, height = plot_height)
           } else if(grepl("\\.pdf", out_file)){
-            pdf(filename = out_file,
+            cairo_pdf(filename = out_file,
                 width = plot_width, height = plot_height)
           } else if(grepl("\\.png", out_file)){
             png(filename = out_file,
@@ -139,7 +141,7 @@ plot_policy_wheels = function(data,
                widths = rep(panel_width, ncols))
         
         # adding policy wheels to plot
-        lapply(policy_intervals, plot_policy_wheel_internal, states,  df, wheel_opts, policies)
+        lapply(policy_intervals, plot_policy_wheel_internal, states,  df, wheel_opts, policies, font_size)
         
         # if(!is.null(title)){
         #   plot.new()
