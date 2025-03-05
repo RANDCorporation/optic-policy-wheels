@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.55">
+<meta name="generator" content="quarto-1.6.40">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -14,7 +14,7 @@
 <meta name="author" content="Seema Choksy Pessar">
 <meta name="author" content="Rosalie Liccardo Pacula">
 <meta name="author" content="Bradley Stein">
-<meta name="dcterms.date" content="2025-02-27">
+<meta name="dcterms.date" content="2025-03-05">
 
 <title>Tutorial – OPTIC Policy Wheels</title>
 <style>
@@ -78,10 +78,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-ddd961a2510921635943dfbbd19534c4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -158,7 +158,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
   <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup">Setup</a></li>
   <li><a href="#plotting-policy-wheels" id="toc-plotting-policy-wheels" class="nav-link" data-scroll-target="#plotting-policy-wheels">Plotting Policy Wheels</a></li>
-  <li><a href="#sources" id="toc-sources" class="nav-link" data-scroll-target="#sources">Sources:</a></li>
+  <li><a href="#sources" id="toc-sources" class="nav-link" data-scroll-target="#sources">Sources</a></li>
   </ul>
 </nav>
     </div>
@@ -191,7 +191,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">February 27, 2025</p>
+      <p class="date">March 5, 2025</p>
     </div>
   </div>
   
@@ -537,11 +537,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <hr>
 </section>
 <section id="sources" class="level1">
-<h1>Sources:</h1>
+<h1>Sources</h1>
 <ul>
-<li>Zuguang Gu, Lei Gu, Roland Eils, Matthias Schlesner, and Benedikt Brors, “circlize Implements and Enhances Circular Visualization in R,” <em>Bioinformatics</em>, Vol. 30, No.&nbsp;19, October 2014.</li>
-<li>Garrett Grolemund and Hadley Wickham, “Dates and Times Made Easy with lubridate,” <em>Journal of Statistical Software</em>, Vol. 30, No.&nbsp;3, April 2011.</li>
 <li>Matt Dowle and Arun Srinivasan, “data.table: Extension of ‘data.frame,’” source code, version 1.16.4, February 17, 2023. As of July 29, 2023: https://cran.r-project.org/web/packages/data.table/</li>
+<li>Garrett Grolemund and Hadley Wickham, “Dates and Times Made Easy with lubridate,” <em>Journal of Statistical Software</em>, Vol. 30, No.&nbsp;3, April 2011.</li>
+<li>Zuguang Gu, Lei Gu, Roland Eils, Matthias Schlesner, and Benedikt Brors, “circlize Implements and Enhances Circular Visualization in R,” <em>Bioinformatics</em>, Vol. 30, No.&nbsp;19, October 2014.</li>
 <li>Hadley Wickham, “The Split-Apply-Combine Strategy for Data Analysis,” <em>Journal of Statistical Software</em>, Vol. 40, No.&nbsp;1, April 2011.</li>
 </ul>
 
@@ -631,8 +631,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
   clipboard.on('success', onCopySuccess);
   if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
     const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
       text: getTextToCopy,
       container: window.document.getElementById('quarto-embedded-source-code-modal')
@@ -743,7 +741,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {

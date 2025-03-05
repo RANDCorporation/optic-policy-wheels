@@ -16,7 +16,7 @@ This [code repository](https://github.com/RANDCorporation/optic-policy-wheels) (
 ## About This Tool
 
 This research was funded by a National Institute on
-Drug Abuse grant (P50DA046351) to RAND and carried out
+Drug Abuse grant (P50DA046351) and carried out
 within the Access and Delivery Program in RAND Health Care.
 
 RAND Health Care, a division of RAND, promotes healthier

@@ -277,10 +277,10 @@ knitr::include_graphics("www/policy_wheel_3.svg")
 
 -------------------------------------------
 
-# Sources:
+# Sources
 
-* Zuguang Gu, Lei Gu, Roland Eils, Matthias Schlesner, and Benedikt Brors, "circlize Implements and Enhances Circular Visualization in R," *Bioinformatics*, Vol. 30, No. 19, October 2014.
-* Garrett Grolemund and Hadley Wickham, "Dates and Times Made Easy with lubridate," *Journal of Statistical Software*, Vol. 30, No. 3, April 2011.
 * Matt Dowle and Arun Srinivasan, "data.table: Extension of 'data.frame,'" source code, version 1.16.4, February 17, 2023. As of July 29, 2023: 
 https://cran.r-project.org/web/packages/data.table/
+* Garrett Grolemund and Hadley Wickham, "Dates and Times Made Easy with lubridate," *Journal of Statistical Software*, Vol. 30, No. 3, April 2011.
+* Zuguang Gu, Lei Gu, Roland Eils, Matthias Schlesner, and Benedikt Brors, "circlize Implements and Enhances Circular Visualization in R," *Bioinformatics*, Vol. 30, No. 19, October 2014.
 * Hadley Wickham, "The Split-Apply-Combine Strategy for Data Analysis," *Journal of Statistical Software*, Vol. 40, No. 1, April 2011.
